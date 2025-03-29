@@ -3,6 +3,7 @@ import {
   ConnectedWalletInfo,
   createAppKit,
   PublicStateControllerState,
+  SocialProvider,
 } from "@reown/appkit";
 import { JSModalMetadata } from "./modal_metadata";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
@@ -44,7 +45,14 @@ export class JSWeb3Modal {
     return this._wagmiAdapter;
   }
 
-  init(projectId: string, networks: number[], metadata: JSModalMetadata) {
+  init(
+    projectId: string,
+    networks: number[],
+    metadata: JSModalMetadata,
+    email: boolean,
+    includeWalletIds: string[],
+    excludeWalletIds: string[]
+  ) {
     const chains = chainsFromIds(networks);
 
     // set up wagmi adapter (Config)
@@ -55,11 +63,18 @@ export class JSWeb3Modal {
 
     this._wagmiAdapter = wagmiAdapter;
 
+    // email does not work properly, it is always shown
     this._modal = createAppKit({
       projectId,
       metadata: metadata,
       adapters: [wagmiAdapter],
       networks: chains,
+      features: {
+        email: email,
+        socials: false,
+      },
+      includeWalletIds: includeWalletIds,
+      excludeWalletIds: excludeWalletIds,
     });
 
     console.log("Reown modal is initialised");

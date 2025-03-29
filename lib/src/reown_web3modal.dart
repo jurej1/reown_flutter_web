@@ -6,10 +6,18 @@ class Web3Modal {
   static void init({
     required String projectId,
     required List<int> networks,
+    required Web3ModalMetadata metadata,
+    required bool email,
+    List<String>? includeWalletIds,
+    List<String>? excludeWalletIds,
   }) {
     window.web3Modal.init(
       projectId,
       networks.map((e) => e.toJS).toList().toJS,
+      metadata._toJS(),
+      email.toJS,
+      includeWalletIds?.jsify() as JSArray<JSString>?,
+      excludeWalletIds?.jsify() as JSArray<JSString>?,
     );
   }
 

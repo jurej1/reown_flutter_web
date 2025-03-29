@@ -5,6 +5,10 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
   external void init(
     String projectId,
     JSArray<JSNumber> networks,
+    JSModalMetadata metadata,
+    JSBoolean email,
+    JSArray<JSString>? includeWalletIds,
+    JSArray<JSString>? excludeWalletIds,
   );
   external JSPromise open();
   external void disconnect();

@@ -1,4 +1,4 @@
-import 'dart:js_interop';
+// import 'dart:js_interop';
 
-@JS()
-extension type JSReownWeb3Modal(JSObject _) implements JSObject {}
+// @JS()
+// extension type JSReownWeb3Modal(JSObject _) implements JSObject {}

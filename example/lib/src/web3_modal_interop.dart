@@ -70,13 +70,14 @@ class Web3ModalInterop {
   }
 
   getBalance() async {
-    final response = await web3Modal
-        .getBalance(
-          "0x678a415fACA5aDB1f3197ecF7055459Dcc4Fb277".toJS,
-          null,
-          null,
-        )
-        .toDart;
+    final response =
+        await web3Modal
+            .getBalance(
+              "0x678a415fACA5aDB1f3197ecF7055459Dcc4Fb277".toJS,
+              null,
+              null,
+            )
+            .toDart;
 
     print('DART GET BALANCE: $response');
   }
@@ -91,10 +92,11 @@ class Web3ModalInterop {
     final jsCallback =
         // ignore: invalid_runtime_check_with_js_interop_types
         allowInterop((JSString data) {
-      final stringData = data.toDart;
+              final stringData = data.toDart;
 
-      print('DART $stringData');
-    }) as JSFunction;
+              print('DART $stringData');
+            })
+            as JSFunction;
 
     web3Modal.subscribeAccount(jsCallback);
   }
@@ -107,10 +109,11 @@ class Web3ModalInterop {
     final jsCallback =
         // ignore: invalid_runtime_check_with_js_interop_types
         allowInterop((JSString data) {
-      final stringData = data.toDart;
+              final stringData = data.toDart;
 
-      print('DART $stringData');
-    }) as JSFunction;
+              print('DART $stringData');
+            })
+            as JSFunction;
     web3Modal.subscribeNetwork(jsCallback);
   }
 

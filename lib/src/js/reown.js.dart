@@ -1,5 +1,6 @@
 import 'dart:js_interop';
 
+part 'models/bigint.js.dart';
 part 'reown_web3modal.js.dart';
 
 @JS()

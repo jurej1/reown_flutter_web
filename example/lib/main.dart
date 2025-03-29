@@ -20,6 +20,13 @@ class _MyAppState extends State<MyApp> {
     reown.Web3Modal.init(
       projectId: 'a0e1d6c24a654c98c62348e8ae259fd2',
       networks: [1, 56],
+      metadata: reown.Web3ModalMetadata(
+        name: 'Web3Modal',
+        description: 'Web3Modal Example',
+        url: 'https://web3modal.com',
+        icons: ['https://avatars.githubusercontent.com/u/37784886'],
+      ),
+      email: false,
     );
   }
 

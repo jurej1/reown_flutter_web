@@ -5,5 +5,8 @@
     "@tanstack/react-query": "^5.69.0",
     "viem": "^2.23.13",
     "wagmi": "^2.14.15"
+  },
+  "devDependencies": {
+    "webpack-cli": "^6.0.1"
   }
 }

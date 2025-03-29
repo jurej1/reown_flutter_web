@@ -5,6 +5,8 @@ import 'dart:js_interop';
 
 import 'package:web/web.dart' as web;
 
+export 'src/js/reown.js.dart';
+
 var _isReady = false;
 
 /// Initializes the lib.

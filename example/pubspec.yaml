@@ -3,11 +3,12 @@ description: Example project for wagmi_flutter_web
 publish_to: "none"
 
 environment:
-  sdk: ">=2.17.0 <4.0.0"
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
     sdk: flutter
+  js: ^0.7.2
 
 dev_dependencies:
   flutter_test:

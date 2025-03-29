@@ -27,14 +27,14 @@ export class JSWeb3Modal {
   private _wagmiAdapter: WagmiAdapter | undefined;
 
   // private getter for the modal
-  private get modalInstance() {
-    if (this._modal === undefined) {
-      throw new Error(
-        'Reown not initialized. Call "Web3Modal.init" before running anything else'
-      );
-    }
-    return this._modal;
-  }
+  // private get modalInstance() {
+  //   if (this._modal === undefined) {
+  //     throw new Error(
+  //       'Reown not initialized. Call "Web3Modal.init" before running anything else'
+  //     );
+  //   }
+  //   return this._modal;
+  // }
 
   init(projectId: string, networks: number[], metadata: JSModalMetadata) {
     const chains = chainsFromIds(networks);
@@ -53,6 +53,8 @@ export class JSWeb3Modal {
       adapters: [wagmiAdapter],
       networks: chains,
     });
+
+    console.log("Reown modal is initialised");
   }
 
   private isModalInit(): void {

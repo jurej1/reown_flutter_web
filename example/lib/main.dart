@@ -15,16 +15,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    Future(() async {
-      await reown.init();
-
-      reown.Web3Modal.init(
-        projectId: '0xd150561ac084956c16328a3988380aec9d19630a',
-        networks: [1, 56],
-      );
-    });
-
     super.initState();
+
+    reown.Web3Modal.init(
+      projectId: 'a0e1d6c24a654c98c62348e8ae259fd2',
+      networks: [1, 56],
+    );
   }
 
   @override

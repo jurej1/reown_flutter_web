@@ -25,7 +25,7 @@ Future<void> init() async {
 }
 
 void _completeOnReadyEvent(Completer completer) {
-  const readyEventName = 'wagmi_flutter_web_ready';
+  const readyEventName = 'reown_flutter_web_ready';
 
   void readyEventListener(web.EventListener event) {
     web.window.removeEventListener(

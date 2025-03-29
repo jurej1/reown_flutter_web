@@ -17,3 +17,24 @@ class Web3Modal {
     await window.web3Modal.open().toDart;
   }
 }
+
+class Web3ModalMetadata {
+  Web3ModalMetadata({
+    required this.name,
+    required this.description,
+    required this.url,
+    required this.icons,
+  });
+
+  final String name;
+  final String description;
+  final String url;
+  final List<String> icons;
+
+  JSModalMetadata _toJS() => JSModalMetadata(
+        name: name.toJS,
+        description: description.toJS,
+        url: url.toJS,
+        icons: icons.map((icon) => icon.toJS).toList().toJS,
+      );
+}

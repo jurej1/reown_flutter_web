@@ -29,10 +29,25 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
   );
 }
 
+// @JS()
+// extension type PublicStateControllerState._(JSObject _) implements JSObject {
+//   external JSBoolean loading;
+//   external JSBoolean open;
+//   external JSString? selectedNetworkId;
+//   external JSString? activeChain;
+// }
+
 @JS()
-extension type PublicStateControllerState._(JSObject _) implements JSObject {
-  external JSBoolean loading;
-  external JSBoolean open;
-  external JSString? selectedNetworkId;
-  external JSString? activeChain;
+extension type JSModalMetadata._(JSObject _) implements JSObject {
+  external JSModalMetadata({
+    required JSString name,
+    required JSString description,
+    required JSString url,
+    required JSArray<JSString> icons,
+  });
+
+  external JSString name;
+  external JSString description;
+  external JSString url;
+  external JSArray<JSString> icons;
 }

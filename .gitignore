@@ -32,3 +32,4 @@ build/
 
 # JS related
 node_modules
+assets/

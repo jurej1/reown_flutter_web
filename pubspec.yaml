@@ -4,9 +4,10 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: ">=3.3.3 <4.0.0"
+  sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
+  decimal: ^3.2.1
   flutter:
     sdk: flutter
   web: ^1.1.1

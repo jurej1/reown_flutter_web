@@ -6,7 +6,7 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
     String projectId,
     JSArray<JSNumber> networks,
   );
-  external void open();
+  external JSPromise open();
   external void disconnect();
   external JSString getAccount();
   external JSPromise<JSAny?> switchNetwork(JSNumber chainId);

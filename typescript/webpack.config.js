@@ -7,7 +7,7 @@ const commonConfig = {
   },
   output: {
     library: "[name]",
-    path: path.join(__dirname, "../example/assets"),
+    path: path.join(__dirname, "../assets"),
     filename: "[name].js",
   },
   resolve: {

@@ -12,4 +12,8 @@ class Web3Modal {
       networks.map((e) => e.toJS).toList().toJS,
     );
   }
+
+  static Future<void> open() async {
+    await window.web3Modal.open().toDart;
+  }
 }

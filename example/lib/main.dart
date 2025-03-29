@@ -29,6 +29,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: ElevatedButton(
+        onPressed: () async {
+          await reown.Web3Modal.open();
+        },
+        child: Text('OPEN MODAL'),
+      ),
+    );
   }
 }

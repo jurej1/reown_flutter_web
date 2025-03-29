@@ -91,30 +91,35 @@ export class JSWeb3Modal {
   async open(): Promise<void> {
     // might need waitForFocus() method
 
-    await setTimeout(async () => await this._modal?.open(), 200);
+    this.isModalInit();
+    await setTimeout(async () => await this._modal!.open(), 200);
   }
 
   async openAccount(): Promise<void> {
+    this.isModalInit();
     await setTimeout(
-      async () => await this._modal?.open({ view: "Account" }),
+      async () => await this._modal!.open({ view: "Account" }),
       200
     );
   }
 
   async openConnect(): Promise<void> {
+    this.isModalInit();
     await setTimeout(
-      async () => await this._modal?.open({ view: "Connect" }),
+      async () => await this._modal!.open({ view: "Connect" }),
       200
     );
   }
 
   async disconnect(): Promise<void> {
-    await this._modal?.disconnect();
-    await this._wagmiAdapter?.disconnect();
+    this.isModalInit();
+    await this._modal!.disconnect();
+    await this._wagmiAdapter!.disconnect();
   }
 
   async close(): Promise<void> {
-    await this._modal?.close();
+    this.isModalInit();
+    await this._modal!.close();
   }
 
   getAccount(): string {

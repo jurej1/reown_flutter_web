@@ -1,6 +1,6 @@
 import 'dart:js_interop';
 
-import 'package:reown_flutter_web/reown_flutter_web.dart';
+import 'package:reown_flutter_web/src/js/reown.js.dart';
 
 class Web3Modal {
   static void init({

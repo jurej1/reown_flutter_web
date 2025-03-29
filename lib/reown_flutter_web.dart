@@ -5,7 +5,7 @@ import 'dart:js_interop';
 
 import 'package:web/web.dart' as web;
 
-export 'src/js/reown.js.dart';
+export 'src/reown_web3modal.dart';
 
 var _isReady = false;
 

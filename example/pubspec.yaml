@@ -1,4 +1,4 @@
-name: reown_flutter_web
+name: example
 description: Example project for wagmi_flutter_web
 publish_to: "none"
 
@@ -13,6 +13,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  reown_flutter_web:
+    path: ../
 
 flutter:
   uses-material-design: true

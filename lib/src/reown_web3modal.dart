@@ -45,7 +45,11 @@ class Web3Modal {
     // Account
     final response = await window.web3Modal.getAccount().toDart;
 
-    print(response.address);
+    print('Address ${response.address}');
+    print('Addresses: ${response.addresses}');
+    print('ChainID: ${response.chainId}');
+    print('Is Connected: ${response.isConnected}');
+    print('Status: ${response.status}');
   }
 }
 

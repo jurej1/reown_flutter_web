@@ -1,21 +1,25 @@
-import 'package:reown_flutter_web/src/models/account_chain.dart';
+import 'package:reown_flutter_web/src/enums/account_status.dart';
 
 class Account {
   final String? address;
-  final String status;
+  final List<String>? addresses;
   final int? chainId;
-  final AccountChain? chain;
   final bool isConnected;
-  final bool isReconnecting;
   final bool isConnecting;
+  final bool isDisconnected;
+  final bool isReconnecting;
+  final AccountStatus status;
+  // chain
+  // chainID missing
 
   Account({
     required this.address,
-    required this.status,
+    required this.addresses,
     required this.chainId,
-    required this.chain,
     required this.isConnected,
-    required this.isReconnecting,
     required this.isConnecting,
+    required this.isDisconnected,
+    required this.isReconnecting,
+    required this.status,
   });
 }

@@ -78,12 +78,18 @@ class _MyAppState extends State<MyApp> {
               child: Text('Disconnect'),
             ),
             SizedBox(height: 12),
-
             ElevatedButton(
               onPressed: () {
                 reown.Web3Modal.getAccount();
               },
               child: Text('get Account'),
+            ),
+            SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () {
+                reown.Web3Modal.getWalletInfo();
+              },
+              child: Text('get Connected Wallet INFO'),
             ),
           ],
         ),

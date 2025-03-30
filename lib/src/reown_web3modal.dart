@@ -41,15 +41,23 @@ class Web3Modal {
     await window.web3Modal.reconnect().toDart;
   }
 
-  static Future<void> getAccount() async {
+  static void getAccount() {
     // Account
-    final response = await window.web3Modal.getAccount().toDart;
+    final response = window.web3Modal.getAccount().toDart;
 
     print('Address ${response.address}');
     print('Addresses: ${response.addresses}');
     print('ChainID: ${response.chainId}');
     print('Is Connected: ${response.isConnected}');
     print('Status: ${response.status}');
+  }
+
+  static void getWalletInfo() {
+    final response = window.web3Modal.getWalletInfo().toDart;
+
+    print('name ${response.name}');
+    print('icon ${response.icon}');
+    print('type ${response.type}');
   }
 }
 

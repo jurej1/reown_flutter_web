@@ -104,9 +104,8 @@ export class JSWeb3Modal {
 
   getAccount = (): GetAccountReturnType => this.account();
 
-  getWalletInfo(): ConnectedWalletInfo | undefined {
-    return this.modalInstance.getWalletInfo();
-  }
+  getWalletInfo = (): ConnectedWalletInfo | undefined =>
+    this.modalInstance.getWalletInfo();
 
   getModalState(): PublicStateControllerState {
     return this.modalInstance.getState();

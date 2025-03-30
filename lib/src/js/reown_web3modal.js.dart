@@ -15,8 +15,10 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
   external JSPromise openConnect();
   external JSPromise disconnect();
   external JSPromise reconnect();
+  external JSPromise close();
 
   external JSGetAccountReturnType getAccount();
+  external JSConnectedWalletInfo getWalletInfo();
 
   external JSPromise<JSAny?> switchNetwork(JSNumber chainId);
   external JSPromise<JSString> signMessage();

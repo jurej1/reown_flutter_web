@@ -3,7 +3,6 @@ import {
   ConnectedWalletInfo,
   createAppKit,
   PublicStateControllerState,
-  SocialProvider,
 } from "@reown/appkit";
 import { JSModalMetadata } from "./modal_metadata";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
@@ -15,6 +14,7 @@ import {
   reconnect as wagmiReconnect,
   getChains,
   sendTransaction as wagmiSendTransaction,
+  GetAccountReturnType,
 } from "wagmi/actions";
 import { UserAccount } from "./models/user_account";
 import { Config } from "wagmi";
@@ -55,7 +55,6 @@ export class JSWeb3Modal {
   ) {
     const chains = chainsFromIds(networks);
 
-    // set up wagmi adapter (Config)
     const wagmiAdapter = new WagmiAdapter({
       projectId,
       networks: chains,
@@ -77,68 +76,33 @@ export class JSWeb3Modal {
       excludeWalletIds: excludeWalletIds,
     });
 
-    console.log("Reown modal is initialised");
+    console.log("Reown Modal is initialised");
   }
 
-  private get wagmiConfig(): Config {
-    return this.wagmiAdapterInstance.wagmiConfig;
-  }
+  private wagmiConfig = (): Config => this.wagmiAdapterInstance.wagmiConfig;
 
-  private get account(): UserAccount {
-    const account = getAccount(this.wagmiConfig);
+  private account = (): GetAccountReturnType => getAccount(this.wagmiConfig());
 
-    return {
-      address: account.address,
-      status: account.status,
-      chainId: account.chainId,
-      chain: {
-        id: account.chain?.id,
-        name: account.chain?.name,
-        symbol: account.chain?.nativeCurrency.symbol,
-      },
-      isConnected: account.isConnected,
-      isReconnecting: account.isReconnecting,
-      isConnecting: account.isConnecting,
-    };
-  }
+  open = async (): Promise<void> => await this.modalInstance.open();
 
-  async open(): Promise<void> {
-    // might need waitForFocus() method
-    // await setTimeout(async () => await this.modalInstance.open(), 200);
-
-    this.modalInstance.open();
-  }
-
-  async openAccount(): Promise<void> {
-    // await setTimeout(
-    //   async () => await this.modalInstance.open({ view: "Account" }),
-    //   200
-    // );
-
+  openAccount = async (): Promise<void> => {
     await this.modalInstance.open({ view: "Account" });
-  }
+  };
 
-  async openConnect(): Promise<void> {
-    // await setTimeout(
-    //   async () => await this.modalInstance.open({ view: "Connect" }),
-    //   200
-    // );
+  openConnect = async (): Promise<void> => {
+    await this.modalInstance.open({ view: "Connect" });
+  };
 
-    this.modalInstance.open({ view: "Connect" });
-  }
-
-  async disconnect(): Promise<void> {
+  disconnect = async (): Promise<void> => {
     await this.modalInstance.disconnect();
     await this.wagmiAdapterInstance.disconnect();
-  }
+  };
 
-  async close(): Promise<void> {
+  close = async (): Promise<void> => {
     await this.modalInstance.close();
-  }
+  };
 
-  getAccount(): UserAccount {
-    return this.account;
-  }
+  getAccount = (): GetAccountReturnType => this.account();
 
   getWalletInfo(): ConnectedWalletInfo | undefined {
     return this.modalInstance.getWalletInfo();
@@ -169,7 +133,7 @@ export class JSWeb3Modal {
   }
 
   async signMessage(): Promise<string> {
-    const response = await signMessageWagmi(this.wagmiConfig, {
+    const response = await signMessageWagmi(this.wagmiConfig(), {
       message: "Hello World",
     });
 
@@ -182,7 +146,7 @@ export class JSWeb3Modal {
     blockTag: BlockTag | null,
     chainId: number | null
   ) {
-    const response = await getBalanceWagmi(this.wagmiConfig, {
+    const response = await getBalanceWagmi(this.wagmiConfig(), {
       address: address,
       chainId: chainId ?? undefined,
       blockTag: blockTag ?? undefined,
@@ -204,18 +168,15 @@ export class JSWeb3Modal {
   }
 
   subscribeAccount(callback: (data: any) => void) {
-    let lastData: UserAccount | undefined = undefined;
-
-    this.modalInstance.subscribeAccount((_) => {
-      const accountData = this.account;
-
-      const hasChanged = !isEqual(accountData, lastData);
-
-      if (hasChanged) {
-        lastData = accountData;
-        callback(JSON.stringify(accountData));
-      }
-    });
+    // let lastData: UserAccount | undefined = undefined;
+    // this.modalInstance.subscribeAccount((_) => {
+    //   const accountData = this.account;
+    //   const hasChanged = !isEqual(accountData, lastData);
+    //   if (hasChanged) {
+    //     lastData = accountData;
+    //     callback(JSON.stringify(accountData));
+    //   }
+    // });
   }
 
   subscribeNetwork(callback: (data: any) => void) {
@@ -229,7 +190,7 @@ export class JSWeb3Modal {
   }
 
   getChains() {
-    const chains = getChains(this.wagmiConfig);
+    const chains = getChains(this.wagmiConfig());
     console.log(chains);
   }
 
@@ -240,12 +201,15 @@ export class JSWeb3Modal {
     data: AddressType | null,
     valueWei: bigint | null
   ) {
-    const response: AddressType = await wagmiSendTransaction(this.wagmiConfig, {
-      to: to,
-      chainId: chainId ?? undefined,
-      data: data ?? undefined,
-      value: valueWei ?? undefined,
-    });
+    const response: AddressType = await wagmiSendTransaction(
+      this.wagmiConfig(),
+      {
+        to: to,
+        chainId: chainId ?? undefined,
+        data: data ?? undefined,
+        value: valueWei ?? undefined,
+      }
+    );
 
     console.log("TRANSACTION HASH " + response);
   }

@@ -11,8 +11,13 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
     JSArray<JSString>? excludeWalletIds,
   );
   external JSPromise open();
-  external void disconnect();
-  external JSString getAccount();
+  external JSPromise openAccount();
+  external JSPromise openConnect();
+  external JSPromise disconnect();
+  external JSPromise reconnect();
+
+  external JSAccount getAccount();
+
   external JSPromise<JSAny?> switchNetwork(JSNumber chainId);
   external JSPromise<JSString> signMessage();
   external JSPromise<JSString> getBalance(
@@ -20,7 +25,6 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
     JSString? blockTag,
     JSNumber? chainId,
   );
-  external JSPromise reconnect();
   external void subscribeAccount(JSFunction callback);
   external void getChains();
   external void subscribeNetwork(JSFunction callback);

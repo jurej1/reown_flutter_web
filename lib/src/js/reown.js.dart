@@ -1,5 +1,10 @@
 import 'dart:js_interop';
 
+import 'package:reown_flutter_web/src/models/account.dart';
+import 'package:reown_flutter_web/src/models/account_chain.dart';
+
+part 'models/account.js.dart';
+part 'models/account_chain.js.dart';
 part 'models/bigint.js.dart';
 part 'reown_web3modal.js.dart';
 

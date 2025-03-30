@@ -119,10 +119,12 @@ export class JSWeb3Modal {
   }
 
   async openConnect(): Promise<void> {
-    await setTimeout(
-      async () => await this.modalInstance.open({ view: "Connect" }),
-      200
-    );
+    // await setTimeout(
+    //   async () => await this.modalInstance.open({ view: "Connect" }),
+    //   200
+    // );
+
+    this.modalInstance.open({ view: "Connect" });
   }
 
   async disconnect(): Promise<void> {
@@ -134,12 +136,12 @@ export class JSWeb3Modal {
     await this.modalInstance.close();
   }
 
-  getAccount(): string {
-    return JSON.stringify(this.account);
+  getAccount(): UserAccount {
+    return this.account;
   }
 
   getWalletInfo(): ConnectedWalletInfo | undefined {
-    return this._modal?.getWalletInfo();
+    return this.modalInstance.getWalletInfo();
   }
 
   getModalState(): PublicStateControllerState {

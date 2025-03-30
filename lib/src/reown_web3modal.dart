@@ -24,6 +24,29 @@ class Web3Modal {
   static Future<void> open() async {
     await window.web3Modal.open().toDart;
   }
+
+  static Future<void> openAccount() async {
+    await window.web3Modal.openAccount().toDart;
+  }
+
+  static Future<void> openConnect() async {
+    await window.web3Modal.openConnect().toDart;
+  }
+
+  static Future<void> disconnect() async {
+    await window.web3Modal.disconnect().toDart;
+  }
+
+  static Future<void> reconnect() async {
+    await window.web3Modal.reconnect().toDart;
+  }
+
+  static Future<void> getAccount() async {
+    // Account
+    final response = await window.web3Modal.getAccount().toDart;
+
+    print(response.address);
+  }
 }
 
 class Web3ModalMetadata {

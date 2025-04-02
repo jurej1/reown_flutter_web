@@ -14,7 +14,9 @@ import {
   reconnect as wagmiReconnect,
   getChains,
   sendTransaction as wagmiSendTransaction,
+  switchChain as wagmiSwitchChain,
   GetAccountReturnType,
+  switchChain,
 } from "wagmi/actions";
 import { Config } from "wagmi";
 
@@ -113,20 +115,7 @@ export class JSWeb3Modal {
     return this.modalInstance.subscribeState(callback);
   }
 
-  /// BELOWIS NOT IMPLEMENTED YET/////
-  getModalState(): PublicStateControllerState {
-    return this.modalInstance.getState();
-  }
-
-  getIsConnectedState(): boolean {
-    return this.modalInstance.getIsConnectedState();
-  }
-
-  async switchNetwork(chainId: number): Promise<void> {
-    // ERROR 1:
-    // SwitchChainNotSupportedError: "MetaMask" does not support programmatic chain switching.
-    // Anwser: This simply means that the wallet was not properly connected and I should disconnect it and then conenct
-    // it thru the app
+  async switchChain(chainId: number) {
     const chain = chainFromId(chainId);
 
     if (chain === undefined) {
@@ -135,7 +124,16 @@ export class JSWeb3Modal {
       );
     }
 
-    return this.modalInstance.switchNetwork(chain);
+    return await wagmiSwitchChain(this.wagmiConfig(), { chainId: chain.id });
+  }
+
+  /// BELOWIS NOT IMPLEMENTED YET/////
+  getModalState(): PublicStateControllerState {
+    return this.modalInstance.getState();
+  }
+
+  getIsConnectedState(): boolean {
+    return this.modalInstance.getIsConnectedState();
   }
 
   async signMessage(): Promise<string> {

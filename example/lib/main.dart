@@ -14,6 +14,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Stream? stateStream;
+
+  int chain = 1;
+
   @override
   void initState() {
     super.initState();
@@ -89,6 +92,8 @@ class _MyAppState extends State<MyApp> {
             ElevatedButton(
               onPressed: () {
                 final response = reown.Web3Modal.getAccount();
+
+                print('DART: ${response.chainId}');
               },
               child: Text('get Account'),
             ),
@@ -120,10 +125,30 @@ class _MyAppState extends State<MyApp> {
                   return const Text('No state yet');
                 }
 
-                final state = snapshot.data;
-                return Text('Web3Modal state: $state');
+                final state = snapshot.data as reown.Web3ModalState;
+                return Text('Web3Modal state: ${state.selectedNetworkId}');
               },
             ),
+            SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () async {
+                if (chain == 1) {
+                  await reown.Web3Modal.switchChain(chainId: 56);
+                  setState(() {
+                    chain = 56;
+                  });
+                } else {
+                  await reown.Web3Modal.switchChain(chainId: 1);
+                  setState(() {
+                    chain = 1;
+                  });
+                }
+              },
+              child: Text(
+                chain == 1 ? 'Switch to chain 56' : "Switch to chain 1",
+              ),
+            ),
+            SizedBox(height: 12),
           ],
         ),
       ),

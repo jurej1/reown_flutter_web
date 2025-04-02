@@ -56,6 +56,7 @@ class Web3Modal {
     return window.web3Modal.isConnected().toDart;
   }
 
+  // when disconnected the state should be NULL
   static Stream<Web3ModalState> get state {
     late StreamController<Web3ModalState> controller;
     late Function? stopListeningFunction;
@@ -71,7 +72,9 @@ class Web3Modal {
     }
 
     void stopListening() {
-      stopListeningFunction?.call();
+      if (stopListeningFunction != null) {
+        stopListeningFunction!();
+      }
       stopListeningFunction = null;
     }
 
@@ -83,6 +86,10 @@ class Web3Modal {
     );
 
     return controller.stream;
+  }
+
+  static Future<void> switchChain({required int chainId}) {
+    return window.web3Modal.switchChain(chainId.toJS).toDart;
   }
 }
 

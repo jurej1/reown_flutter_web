@@ -10,13 +10,13 @@ import { chainFromId, chainsFromIds } from "./chains";
 import {
   signMessage as signMessageWagmi,
   getBalance as getBalanceWagmi,
-  getAccount,
+  getAccount as wagmiGetAccount,
   reconnect as wagmiReconnect,
-  getChains,
+  getChains as wagmiGetChains,
   sendTransaction as wagmiSendTransaction,
   switchChain as wagmiSwitchChain,
   GetAccountReturnType,
-  switchChain,
+  getChainId as wagmiGetChainId,
 } from "wagmi/actions";
 import { Config } from "wagmi";
 
@@ -81,7 +81,8 @@ export class JSWeb3Modal {
 
   private wagmiConfig = (): Config => this.wagmiAdapterInstance.wagmiConfig;
 
-  private account = (): GetAccountReturnType => getAccount(this.wagmiConfig());
+  private account = (): GetAccountReturnType =>
+    wagmiGetAccount(this.wagmiConfig());
 
   open = async (): Promise<void> => await this.modalInstance.open();
 
@@ -103,6 +104,13 @@ export class JSWeb3Modal {
   };
 
   getAccount = (): GetAccountReturnType => this.account();
+
+  getChainId = (): number => {
+    return wagmiGetChainId(this.wagmiConfig());
+  };
+  getChains() {
+    return wagmiGetChains(this.wagmiConfig());
+  }
 
   isConnected = (): boolean => this.modalInstance.getIsConnectedState();
 
@@ -191,11 +199,6 @@ export class JSWeb3Modal {
       };
       callback(JSON.stringify(newData));
     });
-  }
-
-  getChains() {
-    const chains = getChains(this.wagmiConfig());
-    console.log(chains);
   }
 
   // https://wagmi.sh/core/api/actions/sendTransaction

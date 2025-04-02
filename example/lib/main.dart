@@ -149,6 +149,18 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () async {
+                final chains = reown.Web3Modal.getChains();
+
+                chains.forEach((e) {
+                  print(e.id);
+                  print(e.name);
+                  print(e.nativeCurrency?.name);
+                });
+              },
+              child: Text('Get Chains'),
+            ),
           ],
         ),
       ),

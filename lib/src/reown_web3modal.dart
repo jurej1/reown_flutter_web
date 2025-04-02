@@ -3,7 +3,9 @@ import 'dart:js_interop';
 
 import 'package:reown_flutter_web/src/js/reown.js.dart';
 import 'package:reown_flutter_web/src/models/account.dart';
+import 'package:reown_flutter_web/src/models/chain.dart';
 import 'package:reown_flutter_web/src/models/connected_wallet_info.dart';
+import 'package:reown_flutter_web/src/utils/utils_js.dart';
 
 class Web3Modal {
   static void init({
@@ -90,6 +92,14 @@ class Web3Modal {
 
   static Future<void> switchChain({required int chainId}) {
     return window.web3Modal.switchChain(chainId.toJS).toDart;
+  }
+
+  static List<Chain> getChains() {
+    final result = window.web3Modal.getChains();
+
+    return result.toDart.map((item) {
+      return Chain.fromMap(item.toMap());
+    }).toList();
   }
 }
 

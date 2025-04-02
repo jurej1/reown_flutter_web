@@ -19,6 +19,8 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
 
   external JSGetAccountReturnType getAccount();
   external JSConnectedWalletInfo getWalletInfo();
+  external JSNumber getChainId();
+  external JSArray<JSObject> getChains();
 
   external JSBoolean isConnected();
   external JSFunction subscribeState(JSFunction callback);
@@ -33,7 +35,6 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
     JSString? blockTag,
     JSNumber? chainId,
   );
-  external void getChains();
   external void subscribeNetwork(JSFunction callback);
 
   external JSPromise sendTransaction(

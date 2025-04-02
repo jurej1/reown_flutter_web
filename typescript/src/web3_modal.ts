@@ -16,10 +16,8 @@ import {
   sendTransaction as wagmiSendTransaction,
   GetAccountReturnType,
 } from "wagmi/actions";
-import { UserAccount } from "./models/user_account";
 import { Config } from "wagmi";
 
-import isEqual from "lodash.isequal";
 import { BlockTag } from "./models/blockTag";
 
 export class JSWeb3Modal {
@@ -104,9 +102,18 @@ export class JSWeb3Modal {
 
   getAccount = (): GetAccountReturnType => this.account();
 
+  isConnected = (): boolean => this.modalInstance.getIsConnectedState();
+
   getWalletInfo = (): ConnectedWalletInfo | undefined =>
     this.modalInstance.getWalletInfo();
 
+  subscribeState(
+    callback: (newState: PublicStateControllerState) => void
+  ): () => void {
+    return this.modalInstance.subscribeState(callback);
+  }
+
+  /// BELOWIS NOT IMPLEMENTED YET/////
   getModalState(): PublicStateControllerState {
     return this.modalInstance.getState();
   }
@@ -128,7 +135,7 @@ export class JSWeb3Modal {
       );
     }
 
-    return this._modal?.switchNetwork(chain);
+    return this.modalInstance.switchNetwork(chain);
   }
 
   async signMessage(): Promise<string> {

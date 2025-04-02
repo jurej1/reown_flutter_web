@@ -20,6 +20,11 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
   external JSGetAccountReturnType getAccount();
   external JSConnectedWalletInfo getWalletInfo();
 
+  external JSBoolean isConnected();
+  external JSFunction subscribeState(JSFunction callback);
+
+// BELOW IS NOT IMPLEMENTED
+  external JSFunction subscribeAccount(JSFunction callback);
   external JSPromise<JSAny?> switchNetwork(JSNumber chainId);
   external JSPromise<JSString> signMessage();
   external JSPromise<JSString> getBalance(
@@ -27,7 +32,6 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
     JSString? blockTag,
     JSNumber? chainId,
   );
-  external void subscribeAccount(JSFunction callback);
   external void getChains();
   external void subscribeNetwork(JSFunction callback);
 
@@ -60,4 +64,21 @@ extension type JSModalMetadata._(JSObject _) implements JSObject {
   external JSString description;
   external JSString url;
   external JSArray<JSString> icons;
+}
+
+@JS()
+extension type PublicStateControllerState._(JSObject _) implements JSObject {
+  external JSBoolean loading;
+  external JSBoolean open;
+  external JSString? selectedNetworkId;
+  external JSString? activeChain;
+}
+
+extension Web3ModalStateFromJS on PublicStateControllerState {
+  Web3ModalState get toDart => Web3ModalState(
+        loading: loading.toDart,
+        open: open.toDart,
+        selectedNetworkId: selectedNetworkId?.toDart,
+        activeChain: activeChain?.toDart,
+      );
 }

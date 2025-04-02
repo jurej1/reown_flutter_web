@@ -1,25 +1,57 @@
 library;
 
+import 'dart:async';
+import 'dart:js_interop';
+
+import 'package:web/web.dart' as web;
+
 export 'src/reown_web3modal.dart';
 
-// TODO DYNAMICALLY ADD THE INIT WHICH IS BASICALLY GOING TO
-// INSERT THE main.js into the INDEX
+var _isReady = false;
 
-// Future<void> init() async {
-//   final script = web.HTMLScriptElement()
-//     ..type = 'text/javascript'
-//     ..src = 'assets/packages/reown_flutter_web/assets/main.js';
+Future<void> init() async {
+  if (_isReady) return;
 
-//   script.onLoad.listen((_) {
-//     print('✅ main.js loaded successfully');
-//   });
+  final completer = Completer();
 
-//   script.onError.listen((_) {
-//     print('❌ Failed to load main.js');
-//   });
+  _completeOnReadyEvent(completer);
 
-//   web.window.document.head!.appendChild(script);
-// }
+  final assetsPath = "assets/main.js";
+  final script = web.HTMLScriptElement()
+    ..type = 'module'
+    ..src = 'assets/packages/reown_flutter_web/$assetsPath';
+
+  script.onLoad.listen((_) {
+    print('✅ main.js loaded successfully');
+  });
+
+  script.onError.listen((_) {
+    print('❌ Failed to load main.js');
+  });
+
+  web.window.document.getElementsByTagName('html').item(0)!.append(script);
+
+  _isReady = true;
+
+  return completer.future;
+}
+
+void _completeOnReadyEvent(Completer completer) {
+  const readyEventName = 'reown_flutter_web_ready';
+
+  void readyEventListener(web.Event event) {
+    web.window.document.removeEventListener(
+      readyEventName,
+      readyEventListener.toJS,
+    );
+    completer.complete();
+  }
+
+  web.window.document.addEventListener(
+    readyEventName,
+    readyEventListener.toJS,
+  );
+}
 
 // OLD VERSION DOES NOT WORK
 // // THIS IS NOT USED AND IDK WHY NOT

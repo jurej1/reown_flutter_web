@@ -1,5 +1,6 @@
-import { JSWeb3Modal } from "./src/web3_modal";
 // import { JSWagmiCore } from "./src/wagmi_core";
+
+import { JSWeb3Modal } from "./src/web3_modal";
 
 /// Declaring types on the global window
 declare global {

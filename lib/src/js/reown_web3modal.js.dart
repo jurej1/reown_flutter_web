@@ -26,15 +26,13 @@ extension type JSReownWeb3Modal(JSObject _) implements JSObject {
   external JSFunction subscribeState(JSFunction callback);
 
   external JSPromise switchChain(JSNumber chainId);
+  external JSPromise<JSGetBalanceReturnType> getBalance(
+      JSGetBalanceParams params);
 
 // BELOW IS NOT IMPLEMENTED
   external JSFunction subscribeAccount(JSFunction callback);
   external JSPromise<JSString> signMessage();
-  external JSPromise<JSString> getBalance(
-    JSString address,
-    JSString? blockTag,
-    JSNumber? chainId,
-  );
+
   external void subscribeNetwork(JSFunction callback);
 
   external JSPromise sendTransaction(

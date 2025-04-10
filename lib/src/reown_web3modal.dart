@@ -5,6 +5,7 @@ import 'package:reown_flutter_web/src/js/reown.js.dart';
 import 'package:reown_flutter_web/src/models/account.dart';
 import 'package:reown_flutter_web/src/models/chain.dart';
 import 'package:reown_flutter_web/src/models/connected_wallet_info.dart';
+import 'package:reown_flutter_web/src/models/get_balance.dart';
 import 'package:reown_flutter_web/src/utils/utils_js.dart';
 
 class Web3Modal {
@@ -100,6 +101,13 @@ class Web3Modal {
     return result.toDart.map((item) {
       return Chain.fromMap(item.toMap());
     }).toList();
+  }
+
+  static Future<GetBalanceReturnType> getBalance(
+      GetBalanceParameters params) async {
+    final response = await window.web3Modal.getBalance(params.toJS).toDart;
+
+    return response.toDart;
   }
 }
 

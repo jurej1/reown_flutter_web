@@ -8,8 +8,8 @@ import { JSModalMetadata } from "./modal_metadata";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { chainFromId, chainsFromIds } from "./chains";
 import {
-  signMessage as signMessageWagmi,
-  getBalance as getBalanceWagmi,
+  signMessage as wagmiSignMessage,
+  getBalance as wagmiGetBalance,
   getAccount as wagmiGetAccount,
   reconnect as wagmiReconnect,
   getChains as wagmiGetChains,
@@ -17,6 +17,7 @@ import {
   switchChain as wagmiSwitchChain,
   GetAccountReturnType,
   getChainId as wagmiGetChainId,
+  GetBalanceParameters,
 } from "wagmi/actions";
 import { Config } from "wagmi";
 
@@ -135,7 +136,15 @@ export class JSWeb3Modal {
     return await wagmiSwitchChain(this.wagmiConfig(), { chainId: chain.id });
   }
 
+  getBalance = (params: GetBalanceParameters) => {
+    return wagmiGetBalance(this.wagmiConfig(), params);
+  };
+
   /// BELOWIS NOT IMPLEMENTED YET/////
+  /// BELOWIS NOT IMPLEMENTED YET/////
+  /// BELOWIS NOT IMPLEMENTED YET/////
+  /// BELOWIS NOT IMPLEMENTED YET/////
+
   getModalState(): PublicStateControllerState {
     return this.modalInstance.getState();
   }
@@ -145,34 +154,34 @@ export class JSWeb3Modal {
   }
 
   async signMessage(): Promise<string> {
-    const response = await signMessageWagmi(this.wagmiConfig(), {
+    const response = await wagmiSignMessage(this.wagmiConfig(), {
       message: "Hello World",
     });
 
     return response;
   }
 
-  // https://wagmi.sh/core/api/actions/getBalance
-  async getBalance(
-    address: AddressType,
-    blockTag: BlockTag | null,
-    chainId: number | null
-  ) {
-    const response = await getBalanceWagmi(this.wagmiConfig(), {
-      address: address,
-      chainId: chainId ?? undefined,
-      blockTag: blockTag ?? undefined,
-    });
+  // // https://wagmi.sh/core/api/actions/getBalance
+  // async getBalance(
+  //   address: AddressType,
+  //   blockTag: BlockTag | null,
+  //   chainId: number | null
+  // ) {
+  //   const response = await getBalanceWagmi(this.wagmiConfig(), {
+  //     address: address,
+  //     chainId: chainId ?? undefined,
+  //     blockTag: blockTag ?? undefined,
+  //   });
 
-    const returnData = {
-      decimals: response.decimals,
-      symbol: response.symbol,
-      value: response.value.toString(),
-    };
+  //   const returnData = {
+  //     decimals: response.decimals,
+  //     symbol: response.symbol,
+  //     value: response.value.toString(),
+  //   };
 
-    console.log(response);
-    return JSON.stringify(returnData);
-  }
+  //   console.log(response);
+  //   return JSON.stringify(returnData);
+  // }
 
   // https://wagmi.sh/core/api/actions/reconnect
   async reconnect() {

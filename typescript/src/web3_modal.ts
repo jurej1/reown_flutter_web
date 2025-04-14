@@ -142,6 +142,11 @@ export class JSWeb3Modal {
     return wagmiGetBalance(this.wagmiConfig(), params);
   };
 
+  // https://wagmi.sh/core/api/actions/reconnect
+  async reconnect() {
+    await wagmiReconnect(this.wagmiAdapterInstance.wagmiConfig);
+  }
+
   /// BELOWIS NOT IMPLEMENTED YET/////
   /// BELOWIS NOT IMPLEMENTED YET/////
   /// BELOWIS NOT IMPLEMENTED YET/////
@@ -184,11 +189,6 @@ export class JSWeb3Modal {
   //   console.log(response);
   //   return JSON.stringify(returnData);
   // }
-
-  // https://wagmi.sh/core/api/actions/reconnect
-  async reconnect() {
-    await wagmiReconnect(this.wagmiAdapterInstance.wagmiConfig);
-  }
 
   subscribeAccount(callback: (data: any) => void) {
     // let lastData: UserAccount | undefined = undefined;

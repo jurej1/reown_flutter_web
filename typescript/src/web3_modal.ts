@@ -20,10 +20,11 @@ import {
   GetAccountReturnType,
   getChainId as wagmiGetChainId,
   GetBalanceParameters,
+  SendTransactionParameters,
+  GetBalanceReturnType,
+  SendTransactionReturnType,
 } from "wagmi/actions";
 import { Config } from "wagmi";
-
-import { BlockTag } from "./models/blockTag";
 
 export class JSWeb3Modal {
   // Modal Instance
@@ -138,7 +139,9 @@ export class JSWeb3Modal {
     return await wagmiSwitchChain(this.wagmiConfig(), { chainId: chain.id });
   }
 
-  getBalance = (params: GetBalanceParameters) => {
+  getBalance = (
+    params: GetBalanceParameters
+  ): Promise<GetBalanceReturnType> => {
     return wagmiGetBalance(this.wagmiConfig(), params);
   };
 
@@ -146,6 +149,13 @@ export class JSWeb3Modal {
   async reconnect() {
     await wagmiReconnect(this.wagmiAdapterInstance.wagmiConfig);
   }
+
+  // https://wagmi.sh/core/api/actions/sendTransaction
+  sendTransaction = async (
+    params: SendTransactionParameters
+  ): Promise<SendTransactionReturnType> => {
+    return await wagmiSendTransaction(this.wagmiConfig(), params);
+  };
 
   /// BELOWIS NOT IMPLEMENTED YET/////
   /// BELOWIS NOT IMPLEMENTED YET/////
@@ -210,25 +220,5 @@ export class JSWeb3Modal {
       };
       callback(JSON.stringify(newData));
     });
-  }
-
-  // https://wagmi.sh/core/api/actions/sendTransaction
-  async sendTransaction(
-    to: AddressType,
-    chainId: number | null,
-    data: AddressType | null,
-    valueWei: bigint | null
-  ) {
-    const response: AddressType = await wagmiSendTransaction(
-      this.wagmiConfig(),
-      {
-        to: to,
-        chainId: chainId ?? undefined,
-        data: data ?? undefined,
-        value: valueWei ?? undefined,
-      }
-    );
-
-    console.log("TRANSACTION HASH " + response);
   }
 }

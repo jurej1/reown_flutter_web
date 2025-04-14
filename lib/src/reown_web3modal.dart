@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:js_interop';
 
+import 'package:reown_flutter_web/src/actions/send_transaction.dart';
 import 'package:reown_flutter_web/src/js/reown.js.dart';
 import 'package:reown_flutter_web/src/models/account.dart';
 import 'package:reown_flutter_web/src/models/chain.dart';
@@ -109,6 +110,18 @@ class Web3Modal {
     final response = await window.web3Modal.getBalance(params.toJS).toDart;
 
     return response.toDart;
+  }
+
+  static Future<String> sendTransaction(
+    SendTransactionParameters sendTransactionParameters,
+  ) async {
+    final result = await window.web3Modal
+        .sendTransaction(
+          sendTransactionParameters.toJS,
+        )
+        .toDart;
+
+    return result.toDart;
   }
 }
 

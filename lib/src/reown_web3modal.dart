@@ -104,7 +104,8 @@ class Web3Modal {
   }
 
   static Future<GetBalanceReturnType> getBalance(
-      GetBalanceParameters params) async {
+    GetBalanceParameters params,
+  ) async {
     final response = await window.web3Modal.getBalance(params.toJS).toDart;
 
     return response.toDart;

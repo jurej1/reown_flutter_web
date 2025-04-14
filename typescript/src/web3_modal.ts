@@ -4,9 +4,11 @@ import {
   createAppKit,
   PublicStateControllerState,
 } from "@reown/appkit";
+
 import { JSModalMetadata } from "./modal_metadata";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { chainFromId, chainsFromIds } from "./chains";
+
 import {
   signMessage as wagmiSignMessage,
   getBalance as wagmiGetBalance,

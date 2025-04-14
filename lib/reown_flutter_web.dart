@@ -5,6 +5,7 @@ import 'dart:js_interop';
 
 import 'package:web/web.dart' as web;
 
+export 'src/models/get_balance.dart';
 export 'src/reown_web3modal.dart';
 
 var _isReady = false;

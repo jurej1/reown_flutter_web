@@ -161,6 +161,19 @@ class _MyAppState extends State<MyApp> {
               },
               child: Text('Get Chains'),
             ),
+            SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () async {
+                final balance = await reown.Web3Modal.getBalance(
+                  reown.GetBalanceParameters(
+                    address: '0x678a415fACA5aDB1f3197ecF7055459Dcc4Fb277',
+                  ),
+                );
+
+                print('BALANCE: ${balance.value}');
+              },
+              child: Text('Get Balance'),
+            ),
           ],
         ),
       ),

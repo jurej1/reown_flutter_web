@@ -27,12 +27,25 @@ class GetBalanceParameters {
   final BlockTag? blockTag;
   final int? chainId;
 
-  JSGetBalanceParams get toJS => JSGetBalanceParams(
-        address: address.toJS,
-        blockNumber: blockNumber?.toJS,
-        blockTag: blockTag?.value.toJS,
-        chainId: chainId?.toJS,
-      );
+  JSGetBalanceParams get toJS {
+    final jsObject = JSGetBalanceParams(
+      address: address.toJS,
+    );
+
+    if (blockNumber != null) {
+      jsObject.blockNumber = blockNumber!.toJS;
+    }
+
+    if (blockTag != null) {
+      jsObject.blockTag = blockTag!.value.toJS;
+    }
+
+    if (chainId != null) {
+      jsObject.chainId = chainId!.toJS;
+    }
+
+    return jsObject;
+  }
 }
 
 class GetBalanceReturnType {
